@@ -1,40 +1,28 @@
 # Universal Angular Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
-
-## Demo
-
-[Live Demo](https://ng-universal-uwasvwgjiu.now.sh/) is running on [now.sh](https://zeit.co/steventen/ng-universal/uwasvwgjiu/).
-
-## About
-
-This starter kit contains all the minimal tooling and configuration you need to kick off your next universal Angular 8 project.
-
-It combines [@angular/cli](https://github.com/angular/angular-cli/tree/v8.0.0) and [udk](https://github.com/enten/udk) to won't have to write specific code for development purposes only.
-
-## Features
-
-* [angular 8](https://github.com/angular/angular/tree/8.0.0) as universal web application platform
-* [module-map-ngfactory-loader 8](https://github.com/angular/universal/tree/v8.0.0-beta.0) as server side rendering of lazy routes
-* [angular/cli 8](https://github.com/angular/angular-cli/tree/v8.0.0) as code scaffolder
-* [webpack 4](https://github.com/webpack/webpack/tree/v4.6.0) as module bundler
-* [node](https://nodejs.org/dist/latest-v10.x/docs/api/) as server
-* [express](http://expressjs.com/en/4x/api.html) as request handler
-* [udk-builder](https://github.com/enten/udk/blob/master/angular/lib/udk-builder.ts) as architect builder
-* [ng-udkc](https://github.com/enten/udk/tree/master/angular#ngcontainer) as extreme live development container to _**reload all the things!**_
-    * [webpack/hot/poll](https://github.com/webpack/webpack/blob/v4.6.0/hot/poll.js) to enable hmr on server side
-    * [webpack-hot-middleware](https://github.com/webpack-contrib/webpack-hot-middleware) (dynamically mounted on server) and [@angularclass/hmr](https://github.com/gdi2290/angular-hmr) to enable hmr on
-browser side
-    * [watchpack](https://github.com/webpack/watchpack) to restart dev container when a metafile changed
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
 
 ## Getting started
 
 ```shell
 git clone https://github.com/enten/angular-universal my-project
 cd my-project
-npm install
-npm start
+ng serve
+ng build
+node ./dist/app/server/main.js
 ```
+
+This starter kit contains all the minimal tooling and configuration you need to kick off your next [Angular Universal](https://angular.io/guide/universal) project.
+
+It suggests an universal approach to build an universal application for both browser and server in same time.
+
+The main difference from others universal starter kits is the number of commands needed to develop and build your universal application.
+
+### Commands
+
+* `ng build` - Building bundles for both browser and server platforms in [same compilation](https://github.com/webpack/webpack/tree/master/examples/multi-compiler) ;
+* `ng serve` - Running universal dev server with [HMR](https://webpack.js.org/concepts/hot-module-replacement/) on browser and server sides ;
+* `ng serve -c spa` - Running universal dev server with SSR disabled for angular routes only.
 
 ### Branches
 
@@ -77,30 +65,15 @@ npm start</code></pre></td>
 
 ## Development server
 
-Two different dev servers are provided:
-
-* The universal dev server which enable SSR (build `browser` and `server` targets) ;
-* The [SPA](https://en.wikipedia.org/wiki/Single-page_application) dev server which is a [webpack dev server](https://github.com/webpack/webpack-dev-server) (build `browser` target only).
-
-SPA dev server can be useless (or "broken"): it depends on your server implementation.
-
-### Universal dev server
-
-Run `npm run dev` (or `npx ng-udkc`) for an universal dev server. Navigate to [http://localhost:4000/](http://localhost:4000/).
+Run `ng serve` to start universal dev server. Navigate to [http://localhost:4000/](http://localhost:4000/).
 
 The app will automatically hot-reload on server and browser sides if you change any of the source files.
 
-The server will automatically restart if a change occured in `metafiles` and `metadirs` defined in [udk.container.js](./udk.container.js).
+The full compilation will automatically restart if a hot chunk can't be applied on server side.
+
+Tip: run `ng serve -c spa` to disable server side rendering of routes only.
 
 [![Universal dev server with ng-udkc](https://i.imgur.com/vPzCMBk.gif)](https://imgur.com/a/cpbhHgg)
-
-### SPA dev server
-
-Run `npm run dev:spa` (or `npx ng serve --hmr`) for a SPA dev server Navigate to [http://localhost:4200/](http://localhost:4200/).
-
-The app will automatically reload if you change any of the browser source files.
-
-Note: the universal dev server provide an SPA mode too if you navigate to the `index.html`: [http://localhost:4000/index.html](http://localhost:4000/index.html).
 
 ## Code scaffolding
 
@@ -108,9 +81,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/app` directory.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/app` directory.
 
-Run `npm run build:prod` for a production build.
+Run `ng build --prod` for a production build.
+
+Run `node dist/app/server/main.js` to start application built.
 
 ## Running unit tests
 
